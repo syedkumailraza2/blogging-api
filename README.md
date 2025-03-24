@@ -26,8 +26,8 @@ POST /create
 | ------- | --------------- | -------- | --------------------- |
 | title   | String          | Yes      | Title of the blog     |
 | content | String          | Yes      | Content of the blog   |
-| hashtag | Array of String | Yes      | List of hashtags      |
-| links   | Array of String | Yes      | List of related links |
+| hashtag | String          | Yes      | List of hashtags      |
+| links   | String          | Yes      | List of related links |
 | img     | File            | Yes      | Image to be uploaded  |
 
 **Example Request (Using cURL):**
@@ -37,8 +37,8 @@ curl -X POST "https://blogging-api-xi.vercel.app/blog/create" \
   -H "Content-Type: multipart/form-data" \
   -F "title=Sample Title" \
   -F "content=Sample Content" \
-  -F "hashtag[]=tech" \
-  -F "links[]=https://example.com" \
+  -F "hashtag=tech" \
+  -F "links=https://example.com" \
   -F "img=@path/to/image.jpg"
 ```
 
@@ -51,8 +51,8 @@ curl -X POST "https://blogging-api-xi.vercel.app/blog/create" \
     "_id": "1234567890abcdef",
     "title": "Sample Title",
     "content": "Sample Content",
-    "hashtag": ["tech"],
-    "links": ["https://example.com"],
+    "hashtag": "tech",
+    "links": "https://example.com",
     "img": "https://cloudinary.com/sample-image-url"
   }
 }
@@ -89,8 +89,8 @@ GET https://blogging-api-xi.vercel.app/blog/1234567890abcdef
   "_id": "1234567890abcdef",
   "title": "Sample Title",
   "content": "Sample Content",
-  "hashtag": ["tech"],
-  "links": ["https://example.com"],
+  "hashtag": "tech",
+  "links": "https://example.com",
   "img": "https://cloudinary.com/sample-image-url"
 }
 ```
@@ -121,16 +121,16 @@ GET https://blogging-api-xi.vercel.app/blog/
     "_id": "1234567890abcdef",
     "title": "Sample Title",
     "content": "Sample Content",
-    "hashtag": ["tech"],
-    "links": ["https://example.com"],
+    "hashtag": "tech",
+    "links": "https://example.com",
     "img": "https://cloudinary.com/sample-image-url"
   },
   {
     "_id": "abcdef1234567890",
     "title": "Another Blog",
     "content": "More content",
-    "hashtag": ["coding"],
-    "links": ["https://example2.com"],
+    "hashtag": "coding",
+    "links": "https://example2.com",
     "img": "https://cloudinary.com/sample-image-url-2"
   }
 ]
