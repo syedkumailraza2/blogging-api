@@ -95,4 +95,32 @@ const updateBlog = async (req,res)=>{
     }
 }
 
-export { createBlog, deleteBlog, updateBlog }
+const getBlogs = async (req,res)=>{
+    try {
+        const blogs = await Blog.find(); // Fetch 10 random questions
+
+        res.status(200).json({ message: "Blogs fetched successfully", blogs });
+    } catch (error) {
+        console.error("Error getting blogs:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+const getSpecificBlog = async (req,res)=>{
+    try {
+        const blogId = req.params.id
+        const blogExist = await Blog.findById(blogId)
+
+        if(!blogExist){
+            return res.status(400).json({ message: "Blog does'nt exist" });
+        }
+
+        res.status(200).json({ message: "Blog fetched successfully", blog: blogExist });
+
+    } catch (error) {
+        console.error("Error getting a specific blog:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+export { createBlog, deleteBlog, updateBlog, getBlogs, getSpecificBlog }
