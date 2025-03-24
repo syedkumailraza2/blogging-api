@@ -50,4 +50,22 @@ const createBlog = async (req,res)=>{
     }
 }
 
-export { createBlog }
+const deleteBlog = async (req,res)=>{
+    try {
+        const blogId = req.params.id
+        const blogExist = await Blog.findById(blogId)
+
+        if(!blogExist){
+            return res.status(400).json({ message: "Blog does'nt exist" });
+        }
+
+        await Blog.deleteOne({_id:blogId})
+        res.status(200).json({ message: "Blog deleted successfully"});
+
+    } catch (error) {
+        console.error("Error deleting blog:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+export { createBlog, deleteBlog }
