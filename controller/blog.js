@@ -17,10 +17,6 @@ const createBlog = async (req,res)=>{
             res.status(400).json({message:"link is required"})
         }
 
-        if (!Array.isArray(hashtag)) {
-            return res.status(400).json({ message: "Hashtag must be an array" });
-        }
-
         
 
         const imageBuff = req.files?.img?.[0]?.buffer;
