@@ -10,7 +10,7 @@ dotenv.config();
 const app = express()
 const PORT = process.env.PORT || 8000
 app.use(cors({
-    origin: '*', // Or specify your frontend URL e.g. 'https://yourfrontend.com'
+    origin: 'https://blogingwebsite.vercel.app/', // Or specify your frontend URL e.g. 'https://yourfrontend.com'
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   }));
