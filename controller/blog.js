@@ -68,4 +68,31 @@ const deleteBlog = async (req,res)=>{
     }
 }
 
-export { createBlog, deleteBlog }
+const updateBlog = async (req,res)=>{
+    try {
+        const blogId = req.params.id
+        const blogExist = await Blog.findById(blogId)
+
+        if(!blogExist){
+            return res.status(400).json({ message: "Blog does'nt exist" });
+        }
+
+        if(req.files?.img?.[0]?.buffer) {
+            const uploadedImage = await uploadOnCloudinary(req.files.img[0].buffer);
+            if (uploadedImage) Blog.img = uploadedImage.secure_image;
+        }
+
+        const updatedb = await Blog.findOneAndUpdate(
+            { _id: blogId },
+            { $set: req.body },
+            { new: true } //return updated document
+        )
+
+        res.status(200).json({ message:"Blog updated Successfully", blog: updatedb })
+    } catch (error) {
+        console.error("Error updating blog:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+export { createBlog, deleteBlog, updateBlog }
