@@ -10,11 +10,13 @@ dotenv.config();
 const app = express()
 const PORT = process.env.PORT || 8000
 app.use(cors({
-    origin: 'https://blogingwebsite.vercel.app/', // Or specify your frontend URL e.g. 'https://yourfrontend.com'
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: 'https://blogingwebsite.vercel.app', // Allow only your frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
   }));
   
+  app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
